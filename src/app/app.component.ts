@@ -37,7 +37,6 @@ export class AppComponent implements OnInit {
   dataSource;
 
   constructor(private student: StudentService, private afs: AngularFirestore) {
-
   }
 
   ngOnInit() {
@@ -92,12 +91,11 @@ export class StudentDataSource extends DataSource<any> {
   }
 
   disconnect() {
-
   }
 
   getSortedData() {
     const data = this.studentDB.data.slice();
-    if (!this.sort.active || this.sort.direction == '') { return data; }
+    if (!this.sort.active || this.sort.direction === '') { return data; }
 
     return data.sort((a, b) => {
       let propertyA: number | string = '';
@@ -112,7 +110,7 @@ export class StudentDataSource extends DataSource<any> {
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
 
-      return (valueA < valueB ? -1 : 1) * (this.sort.direction == 'asc' ? 1 : -1);
+      return (valueA < valueB ? -1 : 1) * (this.sort.direction === 'asc' ? 1 : -1);
     });
   }
 }
@@ -128,7 +126,5 @@ export class FilteredDataSource extends DataSource<any> {
   }
 
   disconnect() {
-
   }
-
 }

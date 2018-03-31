@@ -10,7 +10,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { environment } from '../environments/environment';
 
-//Material design
+// Material design
 import { MatTableModule, MatInputModule, MatButtonModule, MatSortModule, MatSort, MatSelectModule} from '@angular/material';
 
 import { StudentService } from './student.service';
