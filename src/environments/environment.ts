@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: <apiKey>,
-    authDomain: <yourauthDomain>,
-    databaseURL: <yourdatabaseURL>,
-    projectId: <yourprojectId>,
-    storageBucket: <yourstoragebucket>,
-    messagingSenderId: <yoursenderIdhere>
+    apiKey: 'AIzaSyAke-QG2Hsbm-3y_qNfl038LmgZ-pU1UkQ',
+    authDomain: 'filteringtables-666.firebaseapp.com',
+    databaseURL: 'https://filteringtables-666.firebaseio.com',
+    projectId: 'filteringtables-666',
+    storageBucket: 'filteringtables-666.appspot.com',
+    messagingSenderId: '287848585400'
   }
 };

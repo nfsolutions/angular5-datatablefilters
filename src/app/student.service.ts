@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import {Injectable} from '@angular/core';
+import {AngularFirestore} from 'angularfire2/firestore';
 
 @Injectable()
 export class StudentService {
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {
+  }
 
   addStudent(studentData) {
     this.afs.collection('students').add(studentData).then(() => {
       console.log('Done');
-    })
+    });
   }
 
   getStudents() {
@@ -24,6 +25,6 @@ export class StudentService {
         reject();
       resolve(this.afs.collection('students', ref =>
         ref.where(customfilters.field, customfilters.criteria, customfilters.filtervalue)).valueChanges());
-    })
+    });
   }
 }
