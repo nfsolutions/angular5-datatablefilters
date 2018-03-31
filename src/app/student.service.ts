@@ -19,9 +19,9 @@ export class StudentService {
 
   filterData(customfilters) {
     return new Promise((resolve, reject) => {
-      if (customfilters.criteria == '')
+      if (customfilters.criteria === '')
         reject();
-      if (customfilters.filtervalue == '')
+      if (customfilters.filtervalue === '')
         reject();
       resolve(this.afs.collection('students', ref =>
         ref.where(customfilters.field, customfilters.criteria, customfilters.filtervalue)).valueChanges());

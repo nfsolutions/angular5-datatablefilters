@@ -1,14 +1,14 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 
-//Angular Material 2
+// Angular Material 2
 import { MatSort } from '@angular/material';
 import { DataSource } from '@angular/cdk/collections';
 
-//Services
+// Services
 import { StudentService } from './student.service';
 
-//rxjs
+// rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Rx';
 
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     studentName: '',
     studentAge: '',
     studentGrade: ''
-  }
+  };
 
   filter = {
     field: 'studentAge',
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     filtervalue: ''
   };
   displayedColumns = ['Name', 'Age', 'Grade'];
-  studentDatabase = new studentDatabase(this.student);
+  studentDatabase = new StudentDatabase(this.student);
   dataSource;
 
   constructor(private student: StudentService, private afs: AngularFirestore) {
@@ -52,9 +52,9 @@ export class AppComponent implements OnInit {
     this.student.filterData(this.filter).then((res: any) => {
       res.subscribe((some) => {
         console.log(some);
-      })
+      });
       this.dataSource = new FilteredDataSource(res);
-    })
+    });
   }
 
   resetFilters() {
@@ -62,22 +62,22 @@ export class AppComponent implements OnInit {
   }
 }
 
-export class studentDatabase {
+export class StudentDatabase {
 
   studentList = new BehaviorSubject([]);
-  get data() { return this.studentList.value };
+  get data() { return this.studentList.value; }
 
   constructor(private student: StudentService) {
     this.student.getStudents().subscribe((student) => {
       this.studentList.next(student);
-    })
+    });
   }
 }
 
 export class StudentDataSource extends DataSource<any> {
 
-  constructor(private studentDB: studentDatabase, private sort: MatSort) {
-    super()
+  constructor(private studentDB: StudentDatabase, private sort: MatSort) {
+    super();
   }
 
   connect(): Observable<any> {
@@ -88,7 +88,7 @@ export class StudentDataSource extends DataSource<any> {
 
     return Observable.merge(...studentData).map(() => {
       return this.getSortedData();
-    })
+    });
   }
 
   disconnect() {
@@ -109,8 +109,8 @@ export class StudentDataSource extends DataSource<any> {
         case 'Grade': [propertyA, propertyB] = [a.studentGrade, b.studentGrade]; break;
       }
 
-      let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      let valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
+      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
 
       return (valueA < valueB ? -1 : 1) * (this.sort.direction == 'asc' ? 1 : -1);
     });
@@ -120,7 +120,7 @@ export class StudentDataSource extends DataSource<any> {
 export class FilteredDataSource extends DataSource<any> {
 
   constructor(private inputobs) {
-    super()
+    super();
   }
 
   connect(): Observable<any> {
