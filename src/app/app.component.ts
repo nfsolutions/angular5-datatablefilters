@@ -67,8 +67,8 @@ export class StudentDatabase {
   studentList = new BehaviorSubject([]);
   get data() { return this.studentList.value; }
 
-  constructor(private student: StudentService) {
-    this.student.getStudents().subscribe((student) => {
+  constructor(private studentService: StudentService) {
+    this.studentService.getStudents().subscribe((student) => {
       this.studentList.next(student);
     });
   }
