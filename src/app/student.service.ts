@@ -14,15 +14,18 @@ export class StudentService {
   }
 
   getStudents() {
+    console.log('student.service: getStudents');
     return this.afs.collection('students').valueChanges();
   }
 
   filterData(customfilters) {
     return new Promise((resolve, reject) => {
-      if (customfilters.criteria === '')
+      if (customfilters.criteria === '') {
         reject();
-      if (customfilters.filtervalue === '')
+      }
+      if (customfilters.filtervalue === '') {
         reject();
+      }
       resolve(this.afs.collection('students', ref =>
         ref.where(customfilters.field, customfilters.criteria, customfilters.filtervalue)).valueChanges());
     });

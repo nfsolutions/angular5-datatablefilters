@@ -33,22 +33,23 @@ export class AppComponent implements OnInit {
     filtervalue: ''
   };
   displayedColumns = ['Name', 'Age', 'Grade'];
-  studentDatabase = new StudentDatabase(this.student);
+  studentDatabase = new StudentDatabase(this.studentService);
   dataSource;
 
-  constructor(private student: StudentService, private afs: AngularFirestore) {
+  constructor(private studentService: StudentService, private afs: AngularFirestore) {
   }
 
   ngOnInit() {
+    console.log('appcomponent: oninit');
     this.dataSource = new StudentDataSource(this.studentDatabase, this.sort);
   }
 
   addStudent() {
-    this.student.addStudent(this.studentDetails);
+    this.studentService.addStudent(this.studentDetails);
   }
 
   filterData() {
-    this.student.filterData(this.filter).then((res: any) => {
+    this.studentService.filterData(this.filter).then((res: any) => {
       res.subscribe((some) => {
         console.log(some);
       });
@@ -80,12 +81,14 @@ export class StudentDataSource extends DataSource<any> {
   }
 
   connect(): Observable<any> {
+    console.log('StudentDataSource: connect');
     const studentData = [
       this.studentDB.studentList,
       this.sort.sortChange
     ];
 
     return Observable.merge(...studentData).map(() => {
+      console.log('StudentDataSource: connect: return Observable.merge');
       return this.getSortedData();
     });
   }
